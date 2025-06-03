@@ -1,9 +1,4 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
+
 import numpy as np
 import os
 import random
@@ -59,17 +54,6 @@ def make_exp_dirs(opt):
 def scandir(dir_path, suffix=None, recursive=False, full_path=False):
     """Scan a directory to find the interested files.
 
-    Args:
-        dir_path (str): Path of the directory.
-        suffix (str | tuple(str), optional): File suffix that we are
-            interested in. Default: None.
-        recursive (bool, optional): If set to True, recursively scan the
-            directory. Default: False.
-        full_path (bool, optional): If set to True, include the dir_path.
-            Default: False.
-
-    Returns:
-        A generator for all the interested files with relative pathes.
     """
 
     if (suffix is not None) and not isinstance(suffix, (str, tuple)):
@@ -101,17 +85,7 @@ def scandir(dir_path, suffix=None, recursive=False, full_path=False):
 def scandir_SIDD(dir_path, keywords=None, recursive=False, full_path=False):
     """Scan a directory to find the interested files.
 
-    Args:
-        dir_path (str): Path of the directory.
-        keywords (str | tuple(str), optional): File keywords that we are
-            interested in. Default: None.
-        recursive (bool, optional): If set to True, recursively scan the
-            directory. Default: False.
-        full_path (bool, optional): If set to True, include the dir_path.
-            Default: False.
-
-    Returns:
-        A generator for all the interested files with relative pathes.
+   
     """
 
     if (keywords is not None) and not isinstance(keywords, (str, tuple)):
@@ -143,9 +117,6 @@ def scandir_SIDD(dir_path, keywords=None, recursive=False, full_path=False):
 def check_resume(opt, resume_iter):
     """Check resume states and pretrain_network paths.
 
-    Args:
-        opt (dict): Options.
-        resume_iter (int): Resume iteration.
     """
     logger = get_root_logger()
     if opt['path']['resume_state']:
@@ -172,12 +143,6 @@ def check_resume(opt, resume_iter):
 def sizeof_fmt(size, suffix='B'):
     """Get human readable file size.
 
-    Args:
-        size (int): File size.
-        suffix (str): Suffix. Default: 'B'.
-
-    Return:
-        str: Formated file siz.
     """
     for unit in ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z']:
         if abs(size) < 1024.0:

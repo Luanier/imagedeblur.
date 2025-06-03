@@ -1,9 +1,3 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
 
 import math
 import torch
@@ -11,19 +5,7 @@ from torch.utils.data.sampler import Sampler
 
 
 class EnlargedSampler(Sampler):
-    """Sampler that restricts data loading to a subset of the dataset.
 
-    Modified from torch.utils.data.distributed.DistributedSampler
-    Support enlarging the dataset for iteration-based training, for saving
-    time when restart the dataloader after each epoch
-
-    Args:
-        dataset (torch.utils.data.Dataset): Dataset used for sampling.
-        num_replicas (int | None): Number of processes participating in
-            the training. It is usually the world_size.
-        rank (int | None): Rank of the current process within num_replicas.
-        ratio (int): Enlarging ratio. Default: 1.
-    """
 
     def __init__(self, dataset, num_replicas, rank, ratio=1):
         self.dataset = dataset

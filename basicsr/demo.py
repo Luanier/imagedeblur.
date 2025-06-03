@@ -1,19 +1,12 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
+
 import torch
 
-# from basicsr.data import create_dataloader, create_dataset
+
 from basicsr.models import create_model
 from basicsr.train import parse_options
 from basicsr.utils import FileClient, imfrombytes, img2tensor, padding, tensor2img, imwrite
 
-# from basicsr.utils import (get_env_info, get_root_logger, get_time_str,
-#                            make_exp_dirs)
-# from basicsr.utils.options import dict2str
+
 
 def main():
     # parse options, set distributed setting, set ramdom seed

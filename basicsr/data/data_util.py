@@ -1,9 +1,4 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
+
 import cv2
 import numpy as np
 import torch
@@ -15,17 +10,7 @@ from basicsr.utils import img2tensor, scandir
 
 
 def read_img_seq(path, require_mod_crop=False, scale=1):
-    """Read a sequence of images from a given folder path.
-
-    Args:
-        path (list[str] | str): List of image paths or image folder path.
-        require_mod_crop (bool): Require mod crop for each image.
-            Default: False.
-        scale (int): Scale factor for mod_crop. Default: 1.
-
-    Returns:
-        Tensor: size (t, c, h, w), RGB, [0, 1].
-    """
+  
     if isinstance(path, list):
         img_paths = path
     else:

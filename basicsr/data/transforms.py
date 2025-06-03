@@ -1,25 +1,11 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
-import cv2
+
 import random
 from cv2 import rotate
 import numpy as np
 
 
 def mod_crop(img, scale):
-    """Mod crop images, used during testing.
-
-    Args:
-        img (ndarray): Input image.
-        scale (int): Scale factor.
-
-    Returns:
-        ndarray: Result image.
-    """
+ 
     img = img.copy()
     if img.ndim in (2, 3):
         h, w = img.shape[0], img.shape[1]
@@ -35,21 +21,7 @@ def paired_random_crop(img_gts, img_lqs, gt_patch_size, scale, gt_path):
 
     It crops lists of lq and gt images with corresponding locations.
 
-    Args:
-        img_gts (list[ndarray] | ndarray): GT images. Note that all images
-            should have the same shape. If the input is an ndarray, it will
-            be transformed to a list containing itself.
-        img_lqs (list[ndarray] | ndarray): LQ images. Note that all images
-            should have the same shape. If the input is an ndarray, it will
-            be transformed to a list containing itself.
-        gt_patch_size (int): GT patch size.
-        scale (int): Scale factor.
-        gt_path (str): Path to ground-truth.
-
-    Returns:
-        list[ndarray] | ndarray: GT images and LQ images. If returned results
-            only have one element, just return ndarray.
-    """
+   """
 
     if not isinstance(img_gts, list):
         img_gts = [img_gts]
@@ -97,20 +69,6 @@ def paired_random_crop_hw(img_gts, img_lqs, gt_patch_size_h, gt_patch_size_w, sc
 
     It crops lists of lq and gt images with corresponding locations.
 
-    Args:
-        img_gts (list[ndarray] | ndarray): GT images. Note that all images
-            should have the same shape. If the input is an ndarray, it will
-            be transformed to a list containing itself.
-        img_lqs (list[ndarray] | ndarray): LQ images. Note that all images
-            should have the same shape. If the input is an ndarray, it will
-            be transformed to a list containing itself.
-        gt_patch_size (int): GT patch size.
-        scale (int): Scale factor.
-        gt_path (str): Path to ground-truth.
-
-    Returns:
-        list[ndarray] | ndarray: GT images and LQ images. If returned results
-            only have one element, just return ndarray.
     """
 
     if not isinstance(img_gts, list):
@@ -123,16 +81,6 @@ def paired_random_crop_hw(img_gts, img_lqs, gt_patch_size_h, gt_patch_size_w, sc
     lq_patch_size_h = gt_patch_size_h // scale
     lq_patch_size_w = gt_patch_size_w // scale
 
-    # if h_gt != h_lq * scale or w_gt != w_lq * scale:
-    #     raise ValueError(
-    #         f'Scale mismatches. GT ({h_gt}, {w_gt}) is not {scale}x ',
-    #         f'multiplication of LQ ({h_lq}, {w_lq}).')
-    # if h_lq < lq_patch_size or w_lq < lq_patch_size:
-    #     raise ValueError(f'LQ ({h_lq}, {w_lq}) is smaller than patch size '
-    #                      f'({lq_patch_size}, {lq_patch_size}). '
-    #                      f'Please remove {gt_path}.')
-
-    # randomly choose top and left coordinates for lq patch
     top = random.randint(0, h_lq - lq_patch_size_h)
     left = random.randint(0, w_lq - lq_patch_size_w)
 
@@ -160,20 +108,6 @@ def augment(imgs, hflip=True, rotation=True, flows=None, return_status=False, vf
     We use vertical flip and transpose for rotation implementation.
     All the images in the list use the same augmentation.
 
-    Args:
-        imgs (list[ndarray] | ndarray): Images to be augmented. If the input
-            is an ndarray, it will be transformed to a list.
-        hflip (bool): Horizontal flip. Default: True.
-        rotation (bool): Ratotation. Default: True.
-        flows (list[ndarray]: Flows to be augmented. If the input is an
-            ndarray, it will be transformed to a list.
-            Dimension is (h, w, 2). Default: None.
-        return_status (bool): Return the status of flip and rotation.
-            Default: False.
-
-    Returns:
-        list[ndarray] | ndarray: Augmented images and flows. If returned
-            results only have one element, just return ndarray.
 
     """
     hflip = hflip and random.random() < 0.5
@@ -227,13 +161,7 @@ def augment(imgs, hflip=True, rotation=True, flows=None, return_status=False, vf
 def img_rotate(img, angle, center=None, scale=1.0):
     """Rotate image.
 
-    Args:
-        img (ndarray): Image to be rotated.
-        angle (float): Rotation angle in degrees. Positive values mean
-            counter-clockwise rotation.
-        center (tuple[int]): Rotation center. If the center is None,
-            initialize it as the center of the image. Default: None.
-        scale (float): Isotropic scale factor. Default: 1.0.
+  
     """
     (h, w) = img.shape[:2]
 

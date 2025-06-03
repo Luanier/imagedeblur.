@@ -1,9 +1,4 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
+
 from os import path as osp
 from torch.utils import data as data
 from torchvision.transforms.functional import normalize
@@ -13,20 +8,7 @@ from basicsr.utils import FileClient, imfrombytes, img2tensor, scandir
 
 
 class SingleImageDataset(data.Dataset):
-    """Read only lq images in the test phase.
-
-    Read LQ (Low Quality, e.g. LR (Low Resolution), blurry, noisy, etc).
-
-    There are two modes:
-    1. 'meta_info_file': Use meta information file to generate paths.
-    2. 'folder': Scan folders to generate paths.
-
-    Args:
-        opt (dict): Config for train datasets. It contains the following keys:
-            dataroot_lq (str): Data root path for lq.
-            meta_info_file (str): Path for meta information file.
-            io_backend (dict): IO backend type and other kwarg.
-    """
+ 
 
     def __init__(self, opt):
         super(SingleImageDataset, self).__init__()

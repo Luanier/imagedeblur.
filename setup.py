@@ -1,10 +1,3 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
-#!/usr/bin/env python
 
 from setuptools import find_packages, setup
 
@@ -21,9 +14,7 @@ version_file = 'basicsr/version.py'
 
 def readme():
     return ''
-    # with open('README.md', encoding='utf-8') as f:
-    #     content = f.read()
-    # return content
+
 
 
 def get_git_hash():

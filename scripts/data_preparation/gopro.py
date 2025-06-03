@@ -1,9 +1,4 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
+
 import cv2
 import numpy as np
 import os
@@ -40,11 +35,6 @@ def main():
 def extract_subimages(opt):
     """Crop images to subimages.
 
-    Args:
-        opt (dict): Configuration dict. It contains:
-            input_folder (str): Path to the input folder.
-            save_folder (str): Path to save folder.
-            n_thread (int): Thread number.
     """
     input_folder = opt['input_folder']
     save_folder = opt['save_folder']
@@ -71,18 +61,6 @@ def extract_subimages(opt):
 def worker(path, opt):
     """Worker for each process.
 
-    Args:
-        path (str): Image path.
-        opt (dict): Configuration dict. It contains:
-            crop_size (int): Crop size.
-            step (int): Step for overlapped sliding window.
-            thresh_size (int): Threshold size. Patches whose size is lower
-                than thresh_size will be dropped.
-            save_folder (str): Path to save folder.
-            compression_level (int): for cv2.IMWRITE_PNG_COMPRESSION.
-
-    Returns:
-        process_info (str): Process information displayed in progress bar.
     """
     crop_size = opt['crop_size']
     step = opt['step']

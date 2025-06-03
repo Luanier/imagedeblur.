@@ -1,9 +1,4 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
+
 import math
 import requests
 from tqdm import tqdm
@@ -14,12 +9,6 @@ from .misc import sizeof_fmt
 def download_file_from_google_drive(file_id, save_path):
     """Download files from google drive.
 
-    Ref:
-    https://stackoverflow.com/questions/25010369/wget-curl-large-file-from-google-drive  # noqa E501
-
-    Args:
-        file_id (str): File id.
-        save_path (str): Save path.
     """
 
     session = requests.Session()

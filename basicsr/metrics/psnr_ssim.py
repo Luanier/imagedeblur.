@@ -1,11 +1,4 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# modified from https://github.com/mayorx/matlab_ssim_pytorch_implementation/blob/main/calc_ssim.py
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
+
 import cv2
 import numpy as np
 
@@ -19,20 +12,6 @@ def calculate_psnr(img1,
                    input_order='HWC',
                    test_y_channel=False):
     """Calculate PSNR (Peak Signal-to-Noise Ratio).
-
-    Ref: https://en.wikipedia.org/wiki/Peak_signal-to-noise_ratio
-
-    Args:
-        img1 (ndarray/tensor): Images with range [0, 255]/[0, 1].
-        img2 (ndarray/tensor): Images with range [0, 255]/[0, 1].
-        crop_border (int): Cropped pixels in each edge of an image. These
-            pixels are not involved in the PSNR calculation.
-        input_order (str): Whether the input order is 'HWC' or 'CHW'.
-            Default: 'HWC'.
-        test_y_channel (bool): Test on Y channel of YCbCr. Default: False.
-
-    Returns:
-        float: psnr result.
     """
 
     assert img1.shape == img2.shape, (
@@ -91,15 +70,6 @@ def calculate_psnr_left(img1,
 
 def _ssim(img1, img2, max_value):
     """Calculate SSIM (structural similarity) for one channel images.
-
-    It is called by func:`calculate_ssim`.
-
-    Args:
-        img1 (ndarray): Images with range [0, 255] with order 'HWC'.
-        img2 (ndarray): Images with range [0, 255] with order 'HWC'.
-
-    Returns:
-        float: ssim result.
     """
 
     C1 = (0.01 * max_value)**2
@@ -210,15 +180,6 @@ def _ssim_3d(img1, img2, max_value):
 def _ssim_cly(img1, img2):
     assert len(img1.shape) == 2 and len(img2.shape) == 2
     """Calculate SSIM (structural similarity) for one channel images.
-
-    It is called by func:`calculate_ssim`.
-
-    Args:
-        img1 (ndarray): Images with range [0, 255] with order 'HWC'.
-        img2 (ndarray): Images with range [0, 255] with order 'HWC'.
-
-    Returns:
-        float: ssim result.
     """
 
     C1 = (0.01 * 255)**2
@@ -255,27 +216,6 @@ def calculate_ssim(img1,
                    test_y_channel=False,
                    ssim3d=True):
     """Calculate SSIM (structural similarity).
-
-    Ref:
-    Image quality assessment: From error visibility to structural similarity
-
-    The results are the same as that of the official released MATLAB code in
-    https://ece.uwaterloo.ca/~z70wang/research/ssim/.
-
-    For three-channel images, SSIM is calculated for each channel and then
-    averaged.
-
-    Args:
-        img1 (ndarray): Images with range [0, 255].
-        img2 (ndarray): Images with range [0, 255].
-        crop_border (int): Cropped pixels in each edge of an image. These
-            pixels are not involved in the SSIM calculation.
-        input_order (str): Whether the input order is 'HWC' or 'CHW'.
-            Default: 'HWC'.
-        test_y_channel (bool): Test on Y channel of YCbCr. Default: False.
-
-    Returns:
-        float: ssim result.
     """
 
     assert img1.shape == img2.shape, (
@@ -311,22 +251,13 @@ def calculate_ssim(img1,
             return _ssim_cly(img1[..., 0], img2[..., 0])
 
         ssims = []
-        # ssims_before = []
-
-        # skimage_before = skimage.metrics.structural_similarity(img1, img2, data_range=255., multichannel=True)
-        # print('.._skimage',
-        #       skimage.metrics.structural_similarity(img1, img2, data_range=255., multichannel=True))
+       
         max_value = 1 if img1.max() <= 1 else 255
         with torch.no_grad():
             final_ssim = _ssim_3d(img1, img2, max_value) if ssim3d else _ssim(img1, img2, max_value)
             ssims.append(final_ssim)
 
-        # for i in range(img1.shape[2]):
-        #     ssims_before.append(_ssim(img1, img2))
-
-        # print('..ssim mean , new {:.4f}  and before {:.4f} .... skimage before {:.4f}'.format(np.array(ssims).mean(), np.array(ssims_before).mean(), skimage_before))
-            # ssims.append(skimage.metrics.structural_similarity(img1[..., i], img2[..., i], multichannel=False))
-
+        
         return np.array(ssims).mean()
 
     if img1.ndim == 3 and img1.shape[2] == 6:

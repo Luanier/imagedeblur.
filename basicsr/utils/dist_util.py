@@ -1,11 +1,4 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
-# Modified from BasicSR (https://github.com/xinntao/BasicSR)
-# Copyright 2018-2020 BasicSR Authors
-# ------------------------------------------------------------------------
 
-# Modified from https://github.com/open-mmlab/mmcv/blob/master/mmcv/runner/dist_utils.py  # noqa: E501
 import functools
 import os
 import subprocess
@@ -35,13 +28,6 @@ def _init_dist_pytorch(backend, **kwargs):
 def _init_dist_slurm(backend, port=None):
     """Initialize slurm distributed training environment.
 
-    If argument ``port`` is not specified, then the master port will be system
-    environment variable ``MASTER_PORT``. If ``MASTER_PORT`` is not in system
-    environment variable, then a default port ``29500`` will be used.
-
-    Args:
-        backend (str): Backend of torch.distributed.
-        port (int, optional): Master port. Defaults to None.
     """
     proc_id = int(os.environ['SLURM_PROCID'])
     ntasks = int(os.environ['SLURM_NTASKS'])

@@ -1,6 +1,3 @@
-# ------------------------------------------------------------------------
-# Copyright (c) 2022 megvii-model. All Rights Reserved.
-# ------------------------------------------------------------------------
 
 import numpy as np
 import torch
@@ -84,18 +81,7 @@ def replace_layers(model, base_size, train_size, fast_imp, **kwargs):
         if isinstance(m, nn.AdaptiveAvgPool2d):
             pool = AvgPool2d(base_size=base_size, fast_imp=fast_imp, train_size=train_size)
             assert m.output_size == 1
-            setattr(model, n, pool)
 
-
-'''
-ref. 
-@article{chu2021tlsc,
-  title={Revisiting Global Statistics Aggregation for Improving Image Restoration},
-  author={Chu, Xiaojie and Chen, Liangyu and and Chen, Chengpeng and Lu, Xin},
-  journal={arXiv preprint arXiv:2112.04491},
-  year={2021}
-}
-'''
 class Local_Base():
     def convert(self, *args, train_size, **kwargs):
         replace_layers(self, *args, train_size=train_size, **kwargs)
